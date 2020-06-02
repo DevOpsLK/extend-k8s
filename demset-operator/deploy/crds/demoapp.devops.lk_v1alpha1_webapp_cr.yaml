@@ -1,0 +1,9 @@
+apiVersion: demoapp.devops.lk/v1alpha1
+kind: WebApp
+metadata:
+  name: example-webapp
+spec:
+  # Add fields here
+  size: 3
+  image: "amilaku/demo-app:v0.0.1"
+  colorenabled: "true"

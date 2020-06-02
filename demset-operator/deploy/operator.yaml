@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demset-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: demset-operator
+  template:
+    metadata:
+      labels:
+        name: demset-operator
+    spec:
+      serviceAccountName: demset-operator
+      containers:
+        - name: demset-operator
+          # Replace this with the built image name
+          image: amilaku/demset-operator:v0.0.3
+          command:
+          - demset-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "demset-operator"
